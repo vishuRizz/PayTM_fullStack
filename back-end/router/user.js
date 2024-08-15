@@ -49,7 +49,6 @@ router.post("/signup", middleware, async (req, res, next) => {
   });
 });
 
-
 const signInSchema = zod.object({
   username: zod.string.email(),
   password: zod.string(),
@@ -79,6 +78,34 @@ router.use("signin", async (req, res, next) => {
       message: "Error while logging in",
     });
   }
+});
+
+//
+router.get("/bulk", async (req, res) => {
+  const filter = req.query.filter || "";
+
+  const users = await User.find({
+    $or: [
+      {
+        firstname: {
+          $regex: filter,
+        },
+      },
+      {
+        lastname: {
+          $regex: filter,
+        },
+      },
+    ],
+  });
+  res.json({
+    user: users.map((user) => ({
+      id: user._id,
+      username: user.username,
+      firstname: user.firstname,
+      lastname: user.lastname,
+    })),
+  });
 });
 
 module.exports = router;
