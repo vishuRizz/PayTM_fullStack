@@ -1,11 +1,14 @@
 import React, { useState } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 function Signup() {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+
+  const navigate = useNavigate();
 
   return (
     <main className="flex items-center justify-center h-screen bg-gradient-to-br from-blue-300 to-white place-content-center">
@@ -72,15 +75,18 @@ function Signup() {
         </div>
         <div className="px-3 py-3">
           <button
-            onClick={async() => {
-              const response = await axios.post("http://localhost:3000/api/v1/user/signup", {
-                username,
-                firstName,
-                lastName,
-                password
-              });
-             // console.log("this is the response bc" ,response.data.token)
-               localStorage.setItem('token', response.data.token)
+            onClick={async () => {
+              const response = await axios.post(
+                "http://localhost:3000/api/v1/user/signup",
+                {
+                  username,
+                  firstName,
+                  lastName,
+                  password,
+                }
+              );
+              // console.log("this is the response bc" ,response.data.token)
+              localStorage.setItem("token", response.data.token);
             }}
             type="button"
             className="w-full btn btn-dark"
@@ -89,7 +95,16 @@ function Signup() {
           </button>
           <div className="flex justify-center">
             <div className="cursor-pointer ">Already have an account? </div>
-            <div className="underline cursor-pointer"> Signin</div>
+            <div
+              onClick={() => {
+                //  window.location.href = "/signin"
+                navigate("/signin")
+              }}
+              className="underline cursor-pointer"
+            >
+              {" "}
+              Signin
+            </div>
           </div>
         </div>
       </div>

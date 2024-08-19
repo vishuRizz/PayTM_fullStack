@@ -1,6 +1,8 @@
 import React from "react";
+import {useNavigate} from "react-router-dom";
 
 function Signin() {
+  const navigate = useNavigate();
   return (
     <main className="flex items-center justify-center h-screen bg-gradient-to-br from-blue-300 to-white place-content-center">
       <div className="w-[48vh] h-[50vh]  border-black rounded-lg bg-white">
@@ -39,7 +41,9 @@ function Signin() {
           </button>
           <div className="flex justify-center">
             <div className="cursor-pointer ">Don't have an account? </div>
-            <div className="underline cursor-pointer"> Signup</div>
+            <div onClick={()=>{
+              navigate("/signup")
+            }} className="underline cursor-pointer"> Signup</div>
           </div>
         </div>
       </div>

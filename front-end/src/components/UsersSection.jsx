@@ -11,7 +11,7 @@ function UsersSection() {
       .get("http://localhost:3000/api/v1/user/bulk?filter=" + filter)
       .then((response) => {
         setUsers(response.data.user);
-        console.log(users);
+        console.log(response.data.user);
       });
   }, [filter]);
   return (
@@ -33,7 +33,7 @@ function UsersSection() {
       </div>
       <div className="h-screen px-4 pt-2 border-1">
         {users.map((e) => {
-          return <User key={e.id} name={e.firstName} />;
+          return <User key={e.id} name={e.firstName} id={e._id}/>;
         })}
       </div>
     </>

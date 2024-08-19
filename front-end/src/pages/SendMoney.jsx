@@ -1,7 +1,11 @@
 import React from "react";
 import { RxAvatar } from "react-icons/rx";
+import { useSearchParams } from "react-router-dom";
 
 function SendMoney() {
+  const [searchParams] = useSearchParams();
+  const id = searchParams.get("id");
+  const name = searchParams.get("name");
   return (
     <main className="flex items-center justify-center h-screen bg-gradient-to-br from-blue-300 to-white place-content-center">
       <div className="w-[48vh] h-[40vh]  border-black rounded-lg bg-white p-2">
@@ -13,11 +17,11 @@ function SendMoney() {
             <span className="mt-1">
               <RxAvatar color="green" size={30} />
             </span>
-            <p className="py-2 pl-1 m-0 font-medium text-md"> Friend's Name </p>
+            <p className="pt-1 pl-1 m-0 text-xl font-medium capitalize"> {name} </p>
           </div>
-          <p className="ml-1">Amount (in Rs)</p>
+          <p className="mt-2 mb-0 ml-1">Amount (in Rs)</p>
 
-          <div class="input-group flex-nowrap">
+          <div className="mt-1 input-group flex-nowrap">
             <input
               type="text"
               class="form-control"
