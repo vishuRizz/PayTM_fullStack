@@ -36,7 +36,9 @@ function Signin() {
          
         </div>
         <div className="px-3 py-3">
-          <button type="button" className="w-full btn btn-dark">
+          <button onClick={()=>{
+            navigate("/dashboard")
+          }} type="button" className="w-full btn btn-dark">
             Sign in
           </button>
           <div className="flex justify-center">

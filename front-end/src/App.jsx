@@ -4,15 +4,30 @@ import Signin from "./pages/Signin";
 import Signup from "./pages/Signup";
 import SendMoney from "./pages/SendMoney";
 import Dashboard from "./pages/Dashboard";
+import { useEffect, useState } from "react";
+import ProtectedRoute from "./components/ProtectedRoute";
 
 function App() {
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+
+  useEffect(()=>{
+    // to check the token from backend and local storage?
+    const token = localStorage.getItem("token");
+    if(token){
+      setIsAuthenticated(true);
+      }
+  }, [isAuthenticated])
   return (
     <>
       <Routes>
         <Route path="/signin" element={<Signin />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/send" element={<SendMoney />} />
-        <Route path="/dashboard" element={<Dashboard />} />
+        <ProtectedRoute
+          path="/dashboard"
+          element={<Dashboard />}
+          isAuthenticated={isAuthenticated}
+        />
       </Routes>
     </>
   );

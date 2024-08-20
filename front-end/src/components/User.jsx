@@ -11,7 +11,7 @@ function User({ name, id }) {
           {" "}
           <RxAvatar size={30} />{" "}
         </span>
-        <p className="px-2 mt-2"> {name} </p>
+        <p className="px-2 mt-2 capitalize"> {name} </p>
       </div>
       <div>
         <button
@@ -19,7 +19,7 @@ function User({ name, id }) {
             navigate("/send?id=" + id + "&name=" + name);
           }}
           type="button"
-          class="btn btn-dark"
+          className="btn btn-dark"
         >
           Send Money
         </button>
