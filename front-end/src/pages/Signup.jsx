@@ -87,6 +87,7 @@ function Signup() {
               );
               // console.log("this is the response bc" ,response.data.token)
               localStorage.setItem("token", response.data.token);
+              navigate("/dashboard");
             }}
             type="button"
             className="w-full btn btn-dark"
@@ -98,7 +99,7 @@ function Signup() {
             <div
               onClick={() => {
                 //  window.location.href = "/signin"
-                navigate("/signin")
+                navigate("/signin");
               }}
               className="underline cursor-pointer"
             >

@@ -1,8 +1,10 @@
-import React from "react";
+import axios from "axios";
+import React, { useState } from "react";
 import { RxAvatar } from "react-icons/rx";
 import { useSearchParams } from "react-router-dom";
 
 function SendMoney() {
+  const [amount, setAmount] = useState();
   const [searchParams] = useSearchParams();
   const id = searchParams.get("id");
   const name = searchParams.get("name");
@@ -17,12 +19,18 @@ function SendMoney() {
             <span className="mt-1">
               <RxAvatar color="green" size={30} />
             </span>
-            <p className="pt-1 pl-1 m-0 text-xl font-medium capitalize"> {name} </p>
+            <p className="pt-1 pl-1 m-0 text-xl font-medium capitalize">
+              {" "}
+              {name}{" "}
+            </p>
           </div>
           <p className="mt-2 mb-0 ml-1">Amount (in Rs)</p>
 
           <div className="mt-1 input-group flex-nowrap">
             <input
+              onChange={(e) => {
+                setAmount(e.target.value);
+              }}
               type="text"
               class="form-control"
               placeholder="Enter Amount"
@@ -32,7 +40,24 @@ function SendMoney() {
           </div>
         </div>
         <div className="px-3 py-3">
-          <button type="button" className="w-full btn btn-success">
+          <button
+            onClick={() => {
+              axios.post(
+                "http://localhost:3000/api/v1/account/transfer",
+                {
+                  to: id,
+                  amount,
+                },
+                {
+                  headers: {
+                    Authorization: "Bearer " + localStorage.get("token"),
+                  },
+                }
+              );
+            }}
+            type="button"
+            className="w-full btn btn-success"
+          >
             Send Money
           </button>
           <div className="flex justify-center"></div>

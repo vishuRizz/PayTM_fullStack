@@ -1,24 +1,12 @@
 import React, { useEffect, useState } from "react";
 import User from "./User";
-import axios from "axios";
 
-function UsersSection() {
-  const [users, setUsers] = useState([]);
-  const [filter, setFilter] = useState("");
-
-  useEffect(() => {
-    axios
-      .get("http://localhost:3000/api/v1/user/bulk?filter=" + filter)
-      .then((response) => {
-        setUsers(response.data.user);
-        console.log(response.data.user);
-      });
-  }, [filter]);
+function UsersSection({ users, setFilter }) {
   return (
     <>
       <div className="p-4">
         <h3>Users</h3>
-        <div class="input-group mb-3">
+        <div className="mb-3 input-group">
           <input
             onChange={(e) => {
               setFilter(e.target.value);
@@ -33,7 +21,7 @@ function UsersSection() {
       </div>
       <div className="h-screen px-4 pt-2 border-1">
         {users.map((e) => {
-          return <User key={e.id} name={e.firstName} id={e._id}/>;
+          return <User key={e._id} name={e.firstName} id={e._id} />;
         })}
       </div>
     </>

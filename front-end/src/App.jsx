@@ -5,7 +5,8 @@ import Signup from "./pages/Signup";
 import SendMoney from "./pages/SendMoney";
 import Dashboard from "./pages/Dashboard";
 import { useEffect, useState } from "react";
-import ProtectedRoute from "./components/ProtectedRoute";
+import Logout from "./pages/Logout";
+// import ProtectedRoute from "./components/ProtectedRoute";
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -23,11 +24,13 @@ function App() {
         <Route path="/signin" element={<Signin />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/send" element={<SendMoney />} />
-        <ProtectedRoute
+        {/* <ProtectedRoute
           path="/dashboard"
           element={<Dashboard />}
           isAuthenticated={isAuthenticated}
-        />
+        /> */}
+        <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/logout" element={<Logout />} />
       </Routes>
     </>
   );
