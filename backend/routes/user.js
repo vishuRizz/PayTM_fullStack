@@ -63,14 +63,21 @@ const signinBody = zod.object({
   username: zod.string().email(),
   password: zod.string(),
 });
-// router.get("/getuser", authMiddleware, async (req, res) => {
-//   const user = await User.findOne({
-//     userId: req.userId,
-//   });
-//   res.json({
-//     firstName: user.firstName,
-//   });
-// });
+router.get("/getuser", authMiddleware, async (req, res) => {
+  try {
+    const user = await User.findOne({ _id: req.userId }); 
+
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    res.json({ firstName: user.firstName });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Server error" });
+  }
+});
+
 router.post("/signin", async (req, res) => {
   const { success } = signinBody.safeParse(req.body);
   if (!success) {

@@ -17,26 +17,26 @@ function Signin() {
         </center>
         <div className="px-2">
           <p className="py-2 pl-1 m-0 font-medium"> Email </p>
-          <div class="input-group flex-nowrap">
+          <div className="input-group flex-nowrap">
             <input
               onChange={(e) => {
                 setUsername(e.target.value);
               }}
               type="text"
-              class="form-control"
+              className="form-control"
               placeholder="Vishu"
               aria-label="Username"
               aria-describedby="addon-wrapping"
             />
           </div>
           <p className="py-2 pl-1 m-0 font-medium"> Password </p>
-          <div class="input-group flex-nowrap">
+          <div className="input-group flex-nowrap">
             <input
               onChange={(e) => {
                 setPassword(e.target.value);
               }}
               type="text"
-              class="form-control"
+              className="form-control"
               placeholder="Pratap"
               aria-label="Username"
               aria-describedby="addon-wrapping"

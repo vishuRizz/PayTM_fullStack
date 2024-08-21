@@ -1,9 +1,10 @@
 import axios from "axios";
 import React, { useState } from "react";
 import { RxAvatar } from "react-icons/rx";
-import { useSearchParams } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 
 function SendMoney() {
+  const navigate = useNavigate();
   const [amount, setAmount] = useState();
   const [searchParams] = useSearchParams();
   const id = searchParams.get("id");
@@ -32,7 +33,7 @@ function SendMoney() {
                 setAmount(e.target.value);
               }}
               type="text"
-              class="form-control"
+              className="form-control"
               placeholder="Enter Amount"
               aria-label="Username"
               aria-describedby="addon-wrapping"
@@ -42,6 +43,7 @@ function SendMoney() {
         <div className="px-3 py-3">
           <button
             onClick={() => {
+              const token = localStorage.getItem("token");
               axios.post(
                 "http://localhost:3000/api/v1/account/transfer",
                 {
@@ -50,10 +52,12 @@ function SendMoney() {
                 },
                 {
                   headers: {
-                    Authorization: "Bearer " + localStorage.get("token"),
+                    Authorization: `Bearer ${token}`,
                   },
                 }
               );
+              alert("Money Sent dude!");
+              navigate("/dashboard");
             }}
             type="button"
             className="w-full btn btn-success"
